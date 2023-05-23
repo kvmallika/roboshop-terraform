@@ -18,6 +18,14 @@ tags = {
 }
 }
 
+resource "aws_route53_record" "frontend" {
+  zone_id = "Z04557643QUL1Q83BTGGA"
+  name    = "frontend-dev.vemdevops.online"
+  type    = "A"
+  ttl     = 30
+  records = aws_instance.frontend.private_ip
+}
+
 
 resource "aws_instance" "mongodb" {
 ami           = data.aws_ami.centos.image_id
