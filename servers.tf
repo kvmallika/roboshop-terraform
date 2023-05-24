@@ -11,7 +11,7 @@ variable "components" {
   default = ["frontend", "mongodb", "catalogue"]
 }
 data "aws_security_group" "selected" {
-  name = "allow_all"
+  name = "allow-all"
 }
 
  resource "aws_instance" "instance" {
