@@ -18,7 +18,7 @@ data "aws_security_group" "selected" {
   ami           = data.aws_ami.centos.image_id
   instance_type = var.ins_type
    count = length(var.components)
-vpc_security_group_ids = [data.aws_security_group.selected.id]
+vpc_security_group_ids = [ data.aws_security_group.selected.id ]
 
 tags = {
   Name = var.components[count.index]
