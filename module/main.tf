@@ -29,7 +29,6 @@ resource "null_resource" "provisioner" {
   }
 }
 resource "aws_route53_record" "dnsrecords" {
-  for_each = var.components
   zone_id = "Z04557643QUL1Q83BTGGA"
   name    = "${var.component_name}-dev.vemdevops.online"
   type    = "A"
