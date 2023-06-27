@@ -4,11 +4,11 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids =  [ data.aws_security_group.selected.id ]
 
   tags = {
-    Name = var.component_name
+    Name = locals.name
   }
 }
 resource "null_resource" "provisioner" {
-
+ count = var.provisioner ? 1 : 0
   depends_on = [aws_instance.instance, aws_route53_record.dnsrecords]
   provisioner "remote-exec" {
 
