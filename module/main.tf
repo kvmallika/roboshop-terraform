@@ -14,7 +14,6 @@ resource "null_resource" "provisioner" {
     private_ip = aws_instance.instance.private_ip
   }
   provisioner "remote-exec" {
-
     connection {
       type     = "ssh"
       user     = "centos"
@@ -80,14 +79,8 @@ resource "aws_iam_role_policy" "ssm-ps-policy" {
            "arn:aws:kms:us-east-1:689505382884:key/8ad7b83e-d322-4cb4-a3cf-f1210e2a762a",
            "arn:aws:ssm:us-east-1:689505382884:parameter/${var.env}.${var.component_name}.*"
          ]
-       },
-       {
-         "Sid": "VisualEditor1",
-         "Effect": "Allow",
-         "Action": "ssm:DescribeParameters",
-         "Resource": "*"
        }
-     ]
+       ]
    })
 }
 
