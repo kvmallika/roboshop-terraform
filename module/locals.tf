@@ -11,4 +11,11 @@ locals {
     "cd roboshop-shell" ,
     "sudo bash ${var.component_name}.sh ${var.password}"
     ]
+  db_tags = {
+    Name = "${var.component_name}-${var.env}"
+  }
+  app_tags = {
+    Name = "${var.component_name}-${var.env}"
+    Monitor = "true"
+  }
 }
