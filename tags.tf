@@ -5,6 +5,5 @@ locals {
     cost_center   = 100
     project       = "roboshop"
     env           = var.env
-
   }
 }
