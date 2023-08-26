@@ -9,7 +9,7 @@ module "vpc" {
 
 }
 
-module "web" {
+module "app" {
   source = "git::https://github.com/kvmallika/tf-module-app.git"
 
   for_each = var.app
