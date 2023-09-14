@@ -21,7 +21,6 @@ module "app" {
 
   env=var.env
   bastion_cidr_block = var.bastion_cidr_block
-  tags = local.tags
 
   subnet_ids = element(lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null),0)
   vpc_id = lookup(lookup(module.vpc, "main" ,null ), "vpc_id" , null)
