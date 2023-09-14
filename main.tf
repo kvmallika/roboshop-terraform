@@ -14,5 +14,18 @@ module "app" {
 
   for_each = var.app
   instance_type = each.value["instance_type"]
-  subnet_id = element(lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null),0)
+  desired_capacity = each.value["desired_capacity"]
+  max_size = each.value["max_size"]
+  min_size = each.value["min_size"]
+  name = each.value["name"]
+
+  env=var.env
+  bastion_cidr_block = var.bastion_cidr_block
+  tags = local.tags
+
+  subnet_ids = element(lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null),0)
+  vpc_id = lookup(lookup(module.vpc, "main" ,null ), "vpc_id" , null)
+  allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_cidr_block"],null),"subnet_cidrs",null)
 }
+
+
