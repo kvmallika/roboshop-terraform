@@ -15,6 +15,7 @@ module "docdb" {
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
 
   for_each = var.docdb
+
   env = var.env
   kms_arn = var.kms_arn
   tags = local.tags
