@@ -7,4 +7,3 @@ variable "default_vpc_cidr" {}
 variable "default_vpc_rtid" {}
 variable "kms_arn" {}
 variable "docdb" {}
-variable "engine_version" {}
