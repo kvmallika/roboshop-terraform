@@ -15,6 +15,7 @@ module "docdb" {
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
   for_each = var.docdb
   kms_arn = var.kms_arn
+  env = var.env
   tags = local.tags
   vpc_id = local.vpc_id
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
