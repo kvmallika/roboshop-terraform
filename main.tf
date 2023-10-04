@@ -9,10 +9,8 @@ module "vpc" {
   default_vpc_id = var.default_vpc_id
   default_vpc_cidr = var.default_vpc_cidr
   default_vpc_rtid = var.default_vpc_rtid
-
-
 }
-
+/*
 module "app" {
   source = "git::https://github.com/kvmallika/tf-module-app.git"
 
@@ -30,6 +28,23 @@ module "app" {
   subnet_ids = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
   vpc_id = lookup(lookup(module.vpc, "main" ,null ), "vpc_id" , null)
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
+}
+*/
+
+module "docdb" {
+  source = "git::https://github.com/kvmallika/tf-module-docdb.git"
+
+  for_each = var.docdb
+
+  env = var.env
+  kms_arn = var.kms_arn
+  engine_version = var.engine_version
+  tags = local.tags
+  vpc_id = local.vpc_id
+
+  subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
+
+  allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
 }
 
 
