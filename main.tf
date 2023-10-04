@@ -12,11 +12,8 @@ module "vpc" {
 }
 
 module "docdb" {
-
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
-
   for_each = var.docdb
-
   env = var.env
   kms_arn = var.kms_arn
   tags = local.tags
@@ -24,7 +21,6 @@ module "docdb" {
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
   engine_version = each.value["engine_version"]
   allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
-
 }
 
 
