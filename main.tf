@@ -25,7 +25,19 @@ module "docdb" {
   allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
 }
 
-
+module "rds" {
+  source = "git::https://github.com/kvmallika/tf-module-rds.git"
+  for_each = var.rds
+  kms_arn = var.kms_arn
+  env = var.env
+  tags = local.tags
+  vpc_id = local.vpc_id
+  subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
+  engine_version = each.value["engine_version"]
+  instance_count = each.value["instance_count"]
+  instance_class = each.value["instance_class"]
+  allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
+}
 
 /*
 module "app" {
