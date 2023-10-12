@@ -53,7 +53,18 @@ module "elasticache" {
   replicas_per_node_group = each.value["replicas_per_node_group"]
   allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
 }
-
+module "rabbitmq" {
+  source = "git::https://github.com/kvmallika/tf-module-amazon-mq.git"
+  for_each = var.rabbitmq
+  kms_arn = var.kms_arn
+  env = var.env
+  tags = local.tags
+  vpc_id = local.vpc_id
+  bastion_cidr_block = var.bastion_cidr_block
+  subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
+  instance_type = each.value["instance_type"]
+  allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
+}
 /*
 module "app" {
   source = "git::https://github.com/kvmallika/tf-module-app.git"
