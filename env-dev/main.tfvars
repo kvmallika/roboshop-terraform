@@ -87,3 +87,19 @@
      instance_type = "t3.small"
    }
  }
+ alb = {
+   public={
+     name = "public"
+     subnet_name ="public"
+     internal = false
+     allow_alb_cidr = null
+
+   }
+   private={
+     name = "private"
+     subnet_name ="app"
+     internal = true
+     allow_alb_cidr = "web"
+
+   }
+ }
