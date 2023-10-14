@@ -41,6 +41,7 @@
      desired_capacity   = 2
      max_size           = 10
      min_size           = 2
+     app_port           = 80
    }
    catalogue = {
      name = "catalogue"
@@ -50,6 +51,7 @@
      desired_capacity   = 2
      max_size           = 10
      min_size           = 2
+     app_port           = 8080
   }
 }
  docdb = {

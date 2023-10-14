@@ -98,26 +98,28 @@ module "alb" {
   name     = each.value["name"]
   internal = each.value["internal"]
 }
-/*
+
 module "app" {
+  depends_on =[module.vpc, module.docdb, module.elasticache, module.rabbitmq, module.rds, module.alb]
   source = "git::https://github.com/kvmallika/tf-module-app.git"
 
-  for_each = var.app
-  instance_type = each.value["instance_type"]
-  desired_capacity = each.value["desired_capacity"]
-  max_size = each.value["max_size"]
-  min_size = each.value["min_size"]
-  name = each.value["name"]
-
-  env=var.env
+  for_each           = var.app
+  env                = var.env
   bastion_cidr_block = var.bastion_cidr_block
-  tags = local.tags
+  tags               = local.tags
+
+  instance_type    = each.value["instance_type"]
+  desired_capacity = each.value["desired_capacity"]
+  max_size         = each.value["max_size"]
+  min_size         = each.value["min_size"]
+  name             = each.value["name"]
+  app_port         = each.value["app_port"]
 
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
   vpc_id = lookup(lookup(module.vpc, "main" ,null ), "vpc_id" , null)
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
 }
-*/
+
 
 
 
