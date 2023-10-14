@@ -107,6 +107,7 @@ module "app" {
   env                = var.env
   bastion_cidr_block = var.bastion_cidr_block
   tags               = local.tags
+  domain_name        = var.domain_name
 
   instance_type    = each.value["instance_type"]
   desired_capacity = each.value["desired_capacity"]
@@ -114,9 +115,11 @@ module "app" {
   min_size         = each.value["min_size"]
   name             = each.value["name"]
   app_port         = each.value["app_port"]
+  listener_priority= each.value["listener_priority"]
 
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
   vpc_id = lookup(lookup(module.vpc, "main" ,null ), "vpc_id" , null)
+  listener_arn = lookup(lookup(module.alb, each.value["lb_type"] ,null ), "listener_arn" , null)
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
 }
 
