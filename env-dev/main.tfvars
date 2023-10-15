@@ -34,33 +34,6 @@
      }
   }
 }
-
- app  = {
-   frontend = {
-     name = "frontend"
-     instance_type = "t3.small"
-     subnet_name = "web"
-     allow_app_cidr = "public"
-     desired_capacity   = 2
-     max_size           = 10
-     min_size           = 2
-     app_port           = 80
-     listener_priority  = 1
-     lb_type            = "public"
-   }
-   catalogue = {
-     name = "catalogue"
-     instance_type = "t3.small"
-     subnet_name = "app"
-     allow_app_cidr = "web"
-     desired_capacity   = 2
-     max_size           = 10
-     min_size           = 2
-     app_port           = 8080
-     listener_priority  = 1
-     lb_type            = "private"
-  }
-}
  docdb = {
    main = {
      subnet_name = "db"
@@ -96,6 +69,34 @@
      instance_type = "t3.small"
    }
  }
+ app  = {
+   frontend = {
+     name = "frontend"
+     instance_type = "t3.small"
+     subnet_name = "web"
+     allow_app_cidr = "public"
+     desired_capacity   = 2
+     max_size           = 10
+     min_size           = 2
+     app_port           = 80
+     listener_priority  = 1
+     lb_type            = "public"
+     dns_name           = "dev"
+   }
+   catalogue = {
+     name = "catalogue"
+     instance_type = "t3.small"
+     subnet_name = "app"
+     allow_app_cidr = "web"
+     desired_capacity   = 2
+     max_size           = 10
+     min_size           = 2
+     app_port           = 8080
+     listener_priority  = 1
+     lb_type            = "private"
+  }
+}
+
  alb = {
    public={
      name = "public"
