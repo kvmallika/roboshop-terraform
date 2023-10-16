@@ -109,6 +109,7 @@ module "app" {
   tags               = local.tags
   domain_name        = var.domain_name
   domain_id          = var.domain_id
+  kms_arn            = var.kms_arn
   dns_name           = each.value["name"] == "frontend" ? each.value["dns_name"] : "${each.value["name"]}-${var.env}"
 
   instance_type    = each.value["instance_type"]
