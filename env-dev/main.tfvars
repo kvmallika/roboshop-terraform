@@ -36,8 +36,8 @@
 }
  docdb = {
    main = {
-     subnet_name = "db"
-     allow_db_cidr = "app"
+     subnet_name    = "db"
+     allow_db_cidr  = "app"
      engine_version = "4.0.0"
      instance_count = 1
      instance_class = "db.t3.medium"
@@ -45,8 +45,8 @@
  }
  rds = {
    main = {
-     subnet_name = "db"
-     allow_db_cidr = "app"
+     subnet_name    = "db"
+     allow_db_cidr  = "app"
      engine_version = "5.7.mysql_aurora.2.11.2"
      instance_count = 1
      instance_class = "db.t3.small"
@@ -54,27 +54,27 @@
  }
  elasticache = {
    main = {
-     subnet_name = "db"
-     allow_db_cidr = "app"
-     engine_version = "6.x"
-     num_node_groups = 1
-     node_type = "cache.t3.micro"
+     subnet_name             = "db"
+     allow_db_cidr           = "app"
+     engine_version          = "6.x"
+     num_node_groups         = 1
+     node_type               = "cache.t3.micro"
      replicas_per_node_group = 1
    }
  }
  rabbitmq = {
    main = {
-     subnet_name = "db"
+     subnet_name   = "db"
      allow_db_cidr = "app"
      instance_type = "t3.small"
    }
  }
  app  = {
    frontend = {
-     name = "frontend"
-     instance_type = "t3.small"
-     subnet_name = "web"
-     allow_app_cidr = "public"
+     name               = "frontend"
+     instance_type      = "t3.small"
+     subnet_name        = "web"
+     allow_app_cidr     = "public"
      desired_capacity   = 1
      max_size           = 10
      min_size           = 1
@@ -85,10 +85,10 @@
      parameters         = []
    }
    catalogue = {
-     name = "catalogue"
-     instance_type = "t3.small"
-     subnet_name = "app"
-     allow_app_cidr = "app"
+     name               = "catalogue"
+     instance_type      = "t3.small"
+     subnet_name        = "app"
+     allow_app_cidr     = "app"
      desired_capacity   = 1
      max_size           = 10
      min_size           = 1
@@ -97,20 +97,72 @@
      lb_type            = "private"
      parameters         = ["docdb"]
   }
-}
+   user = {
+     name               = "user"
+     instance_type      = "t3.small"
+     subnet_name        = "app"
+     allow_app_cidr     = "app"
+     desired_capacity   = 1
+     max_size           = 10
+     min_size           = 1
+     app_port           = 8080
+     listener_priority  = 2
+     lb_type            = "private"
+     parameters         = ["docdb"]
+   }
+   cart = {
+     name               = "cart"
+     instance_type      = "t3.small"
+     subnet_name        = "app"
+     allow_app_cidr     = "app"
+     desired_capacity   = 1
+     max_size           = 10
+     min_size           = 1
+     app_port           = 8080
+     listener_priority  = 3
+     lb_type            = "private"
+     parameters         = []
+   }
+   shipping = {
+     name               = "shipping"
+     instance_type      = "t3.small"
+     subnet_name        = "app"
+     allow_app_cidr     = "app"
+     desired_capacity   = 1
+     max_size           = 10
+     min_size           = 1
+     app_port           = 8080
+     listener_priority  = 4
+     lb_type            = "private"
+     parameters         = ["rds"]
+   }
+   payment = {
+     name               = "payment"
+     instance_type      = "t3.small"
+     subnet_name        = "app"
+     allow_app_cidr     = "app"
+     desired_capacity   = 1
+     max_size           = 10
+     min_size           = 1
+     app_port           = 8080
+     listener_priority  = 5
+     lb_type            = "private"
+     parameters         = []
+   }
+ }
 
  alb = {
    public={
-     name = "public"
-     subnet_name ="public"
-     internal = false
+     name           = "public"
+     subnet_name    ="public"
+     internal       = false
      allow_alb_cidr = null
 
    }
    private={
-     name = "private"
-     subnet_name ="app"
-     internal = true
+     name           = "private"
+     subnet_name    ="app"
+     internal       = true
      allow_alb_cidr = "web"
 
    }
