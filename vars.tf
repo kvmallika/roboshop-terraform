@@ -1,4 +1,5 @@
 variable "env" {}
+variable "monitor_cidr" {}
 variable "bastion_cidr_block" {}
 variable "default_vpc_id" {}
 variable "default_vpc_cidr" {}

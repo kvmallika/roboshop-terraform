@@ -107,8 +107,9 @@ module "app" {
 
   for_each           = var.app
   env                = var.env
+  monitor_cidr       = var.monitor_cidr
   bastion_cidr_block = var.bastion_cidr_block
-  tags               = local.tags
+  tags               = merge(local.tags, {Monitor = "true"})
   domain_name        = var.domain_name
   domain_id          = var.domain_id
   kms_arn            = var.kms_arn
