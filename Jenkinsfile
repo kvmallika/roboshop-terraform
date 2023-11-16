@@ -15,9 +15,9 @@ pipeline {
         sh 'terraform init -backend-config=env-${env}/state.tfvars'
      }
     }
-    stage('Terraform apply') {
+    stage('Terraform Apply') {
       steps {
-        sh 'terraform apply -auto-approve -var-file={env}/main.tfvars'
+        sh 'terraform apply -auto-approve -var-file=env-${env}/main.tfvars'
        }
       }
   }
