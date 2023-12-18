@@ -76,13 +76,13 @@
      instance_type      = "t3.small"
      subnet_name        = "web"
      allow_app_cidr     = "public"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 80
      listener_priority  = 1
      lb_type            = "public"
-     dns_name           = "dev"
+     dns_name           = "www"
      parameters         = []
    }
    catalogue = {
@@ -90,9 +90,9 @@
      instance_type      = "t3.small"
      subnet_name        = "app"
      allow_app_cidr     = "app"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 8080
      listener_priority  = 1
      lb_type            = "private"
@@ -103,9 +103,9 @@
      instance_type      = "t3.small"
      subnet_name        = "app"
      allow_app_cidr     = "app"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 8080
      listener_priority  = 2
      lb_type            = "private"
@@ -116,9 +116,9 @@
      instance_type      = "t3.small"
      subnet_name        = "app"
      allow_app_cidr     = "app"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 8080
      listener_priority  = 3
      lb_type            = "private"
@@ -129,9 +129,9 @@
      instance_type      = "t3.small"
      subnet_name        = "app"
      allow_app_cidr     = "app"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 8080
      listener_priority  = 4
      lb_type            = "private"
@@ -142,9 +142,9 @@
      instance_type      = "t3.small"
      subnet_name        = "app"
      allow_app_cidr     = "app"
-     desired_capacity   = 1
+     desired_capacity   = 2
      max_size           = 10
-     min_size           = 1
+     min_size           = 2
      app_port           = 8080
      listener_priority  = 5
      lb_type            = "private"
