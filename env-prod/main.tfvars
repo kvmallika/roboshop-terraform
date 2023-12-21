@@ -126,7 +126,7 @@
    }
    shipping = {
      name               = "shipping"
-     instance_type      = "t3.small"
+     instance_type      = "t3.medium"
      subnet_name        = "app"
      allow_app_cidr     = "app"
      desired_capacity   = 2

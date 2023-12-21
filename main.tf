@@ -131,6 +131,34 @@ module "app" {
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
 }
 
+##load Runner
+data "aws_ami" "ami" {
+  most_recent      = true
+  name_regex       = "Centos-8-DevOps-Practice"
+  owners           = ["973714476881"]
+}
 
+resource "aws_instance" " load " {
+  ami = data.aws_ami.ami.id
+  instance_type = "t3.medium"
+  vpc_security_group_ids = [ "sg-0ab77a3d9871544cc" ]
+  tags = {
+    Name = "load-runner"
+  }
+}
 
+resource "null_resource" "load" {
+  provisioner "remote-exec" {
 
+    connection {
+      host     = aws_instance.load.private_ip
+      user     = "root"
+      password = "DevOps321"
+    }
+
+    inline = [
+      "curl -s https://raw.githubusercontent.com/linuxautomations/labautomation/master/tools/docker/install.sh | bash",
+      "docker pull robotshop/rs-load"
+    ]
+  }
+}
