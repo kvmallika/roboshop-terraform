@@ -138,7 +138,7 @@ data "aws_ami" "ami" {
   owners           = ["973714476881"]
 }
 
-resource "aws_instance" " load " {
+resource "aws_instance" "load" {
   ami = data.aws_ami.ami.id
   instance_type = "t3.medium"
   vpc_security_group_ids = [ "sg-0ab77a3d9871544cc" ]
