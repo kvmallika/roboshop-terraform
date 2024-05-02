@@ -5,8 +5,8 @@
  default_vpc_cidr = "172.31.0.0/16"
  default_vpc_rtid = "rtb-02de44b9fcc4a8e9d"
  kms_arn = "arn:aws:kms:us-east-1:689505382884:key/8ad7b83e-d322-4cb4-a3cf-f1210e2a762a"
- domain_name = "vemdevops.online"
- domain_id = "Z04557643QUL1Q83BTGGA"
+ domain_name = "vemudevops.online"
+ domain_id = "Z025574148TA976KXQTI"
 
  vpc = {
    main = {
