@@ -84,7 +84,7 @@ module "rabbitmq" {
 
 }
 
-module "alb" {
+/*module "alb" {
   source = "git::https://github.com/kvmallika/tf-module-alb.git"
   for_each = var.alb
 
@@ -99,9 +99,9 @@ module "alb" {
 
   name     = each.value["name"]
   internal = each.value["internal"]
-}
+}*/
 
-module "app" {
+/*module "app" {
   depends_on =[module.vpc, module.docdb, module.elasticache, module.rabbitmq, module.rds, module.alb]
   source = "git::https://github.com/kvmallika/tf-module-app.git"
 
@@ -129,6 +129,16 @@ module "app" {
   listener_arn = lookup(lookup(module.alb, each.value["lb_type"] ,null ), "listener_arn" , null)
   lb_dns_name  = lookup(lookup(module.alb, each.value["lb_type"] ,null ), "dns_name" , null)
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
+}*/
+
+module "eks" {
+  source = "github.com/r-devops/tf-module-eks"
+  ENV = var.env
+  PRIVATE_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null),"app",null),"subnet_ids",null)
+  PUBLIC_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), "public",null),"subnet_ids",null)
+  DESIRED_SIZE = 2
+  MIN_SIZE = 2
+  MAX_size = 2
 }
 
 ##load Runner
