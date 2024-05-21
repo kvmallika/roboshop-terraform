@@ -11,7 +11,7 @@ module "vpc" {
   default_vpc_rtid = var.default_vpc_rtid
 }
 
-/*module "docdb" {
+module "docdb" {
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
   for_each = var.docdb
 
@@ -129,7 +129,7 @@ module "app" {
   listener_arn = lookup(lookup(module.alb, each.value["lb_type"] ,null ), "listener_arn" , null)
   lb_dns_name  = lookup(lookup(module.alb, each.value["lb_type"] ,null ), "dns_name" , null)
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_app_cidr"],null),"subnet_cidrs",null)
-}*/
+}
 
 module "eks" {
   source = "git::https://github.com/kvmallika/tf-module-eks.git"
