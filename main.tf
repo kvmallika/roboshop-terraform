@@ -11,7 +11,7 @@ module "vpc" {
   default_vpc_rtid = var.default_vpc_rtid
 }
 
-module "docdb" {
+/*module "docdb" {
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
   for_each = var.docdb
 
@@ -27,10 +27,10 @@ module "docdb" {
   instance_count = each.value["instance_count"]
   instance_class = each.value["instance_class"]
 
-}
+}*/
 
 
-module "rds" {
+/*module "rds" {
   source = "git::https://github.com/kvmallika/tf-module-rds.git"
   for_each = var.rds
 
@@ -46,9 +46,9 @@ module "rds" {
   instance_count = each.value["instance_count"]
   instance_class = each.value["instance_class"]
 
-}
+}*/
 
-module "elasticache" {
+/*module "elasticache" {
   source = "git::https://github.com/kvmallika/tf-module-elasticache.git"
   for_each    = var.elasticache
 
@@ -82,7 +82,7 @@ module "rabbitmq" {
 
   instance_type = each.value["instance_type"]
 
-}
+}*/
 
 /*module "alb" {
   source = "git::https://github.com/kvmallika/tf-module-alb.git"
@@ -132,7 +132,7 @@ module "rabbitmq" {
 }*/
 
 module "eks" {
-  source = "github.com/r-devops/tf-module-eks"
+  source = "git::https://github.com/kvmallika/tf-module-eks.git"
   ENV = var.env
   PRIVATE_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null),"app",null),"subnet_ids",null)
   PUBLIC_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), "public",null),"subnet_ids",null)
