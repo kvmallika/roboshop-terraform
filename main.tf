@@ -139,7 +139,7 @@ module "eks" {
   PUBLIC_SUBNET_IDS = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), "public",null),"subnet_ids",null)
   DESIRED_SIZE = 2
   MIN_SIZE = 2
-  MAX_size = 2
+  MAX_SIZE = 2
 }
 
 ##load Runner
