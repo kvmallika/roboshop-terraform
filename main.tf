@@ -11,7 +11,7 @@ module "vpc" {
   default_vpc_rtid = var.default_vpc_rtid
 }
 
-/*module "docdb" {
+module "docdb" {
   source = "git::https://github.com/kvmallika/tf-module-docdb.git"
   for_each = var.docdb
 
@@ -84,7 +84,7 @@ module "rabbitmq" {
 
 }
 
-module "alb" {
+/*module "alb" {
   source = "git::https://github.com/kvmallika/tf-module-alb.git"
   for_each = var.alb
 
