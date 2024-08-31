@@ -57,6 +57,9 @@ module "elasticache" {
   tags        = local.tags
   vpc_id      = local.vpc_id
 
+
+
+
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["subnet_name"],null),"subnet_ids",null)
   allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main" ,null ), "subnets" , null), each.value["allow_db_cidr"],null),"subnet_cidrs",null)
 
@@ -140,6 +143,7 @@ module "eks" {
   DESIRED_SIZE = 2
   MIN_SIZE = 2
   MAX_SIZE = 2
+  kms_arn  = var.kms_arn
 }
 
 ##load Runner
